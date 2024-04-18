@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prank Website</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    #countdown {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+<h1>Tienes 10 segundos para escribir pk me sacaste de tu close o te hackeo</h1>
+<div id="countdown">Tiempo restante: <span id="timer">20</span> segundos</div>
+<form id="response-form">
+    <textarea name="response" id="response" cols="30" rows="10" placeholder="Escribe aqui :)"></textarea><br>
+    <button type="submit">Enviar</button>
+</form>
+<div id="message"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var timerElement = document.getElementById("timer");
+    var responseForm = document.getElementById("response-form");
+    var messageElement = document.getElementById("message");
+    
+    var secondsLeft = 10;
+    var countdown = setInterval(function() {
+        secondsLeft--;
+        timerElement.textContent = secondsLeft;
+        if (secondsLeft <= 0) {
+            clearInterval(countdown);
+            timerElement.textContent = "0";
+            messageElement.textContent = "Downloading iPhone data...";
+        }
+    }, 1000);
+
+    responseForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        var response = document.getElementById("response").value;
+        // Aquí podrías hacer algo con la respuesta, como enviarla a un servidor o simplemente mostrarla
+        console.log("Respuesta del usuario:", response);
+        // Puedes mostrar un mensaje indicando que se ha recibido la respuesta
+        messageElement.textContent = "Respuesta recibida. ¡Gracias por participar!";
+        clearInterval(countdown); // Detener el contador si se envía la respuesta antes de tiempo
+    });
+});
+</script>
+</body>
+</html>
